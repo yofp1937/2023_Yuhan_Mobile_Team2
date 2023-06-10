@@ -27,8 +27,8 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/drawable_circle_inner"
         android:indeterminate="false"
-        android:max="7200000"
-        android:progress="7200000"
+        android:max="3600000"
+        android:progress="3600000"
         android:progressDrawable="@drawable/drawable_circle_outer"
         android:rotation="90"
         app:layout_constraintTop_toBottomOf="@id/timer_text"/>

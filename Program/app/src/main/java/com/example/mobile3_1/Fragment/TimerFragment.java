@@ -3,9 +3,13 @@ package com.example.mobile3_1.Fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,43 +60,53 @@ public class TimerFragment extends Fragment {
         return fragment;
     }
 
-    //프래그먼트 타이머
-    private static final int MAXTIME = 2 * 60 * 60000; // 1000=1초, 60000=1분, 7200000=2시간
-    enum TimerValue {
-        STARTED,
-        STOPPED
-    }
-    TimerValue timerValue = TimerValue.STOPPED;
     ProgressBar progressBarCircle;
     TextView textViewTime;
     Button btnTimerStart;
     Button btnTimerStop;
-    CountDownTimer countDownTimer;
 
-    private void startCountDownTimer() {
-        countDownTimer = new CountDownTimer(7200000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                //시간측정 카운트다운말고 다시짜야함
-            }
+    //타이머 시간 값을 저장할 변수
+    private long baseTime;
 
-            @Override
-            public void onFinish() {
-                textViewTime.setText(hmsTimeFormatter(0));
-                progressBarCircle.setProgress(MAXTIME);
-                timerValue = TimerValue.STOPPED;
-            }
-        };
-        countDownTimer.start();
+    private void startbtn(){
+        baseTime = SystemClock.elapsedRealtime();
+        handler.sendEmptyMessage(0);
     }
 
-    @SuppressLint("DefaultLocale")
-    private String hmsTimeFormatter(long milliSeconds) {
-        return String.format("%02d:%02d:%02d",
-                TimeUnit.MILLISECONDS.toHours(milliSeconds),
-                TimeUnit.MILLISECONDS.toMinutes(milliSeconds),
-                TimeUnit.MILLISECONDS.toSeconds(milliSeconds));
+
+    private void stopbtn(){
+        handler.removeMessages(0);
+        String timeList = textViewTime.getText().toString();
+        textViewTime.setText(timeList);
+        baseTime = 0;
     }
+
+    private String getTime(){
+        long nowTime = SystemClock.elapsedRealtime();
+        long overTime = nowTime - baseTime;
+
+        long h = overTime/1000/60/60;
+        long m = overTime/1000/60;
+        long s = (overTime/1000)%60;
+
+        progressBarCircle.setProgress(3600000-(int)overTime);
+
+        String recTime = String.format("%02d:%02d:%02d",h,m,s);
+
+        return recTime;
+    }
+
+    Handler handler = new Handler(){
+
+        @NonNull
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+
+            textViewTime.setText(getTime());
+            handler.sendEmptyMessage(0);
+        }
+    };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,14 +131,12 @@ public class TimerFragment extends Fragment {
         View.OnClickListener timerListener = view -> {
             switch (view.getId()){
                 case R.id.btnTimerStart:
-                    timerValue = TimerValue.STARTED;
-                    startCountDownTimer();
+                    startbtn();
                     btnTimerStart.setVisibility(View.INVISIBLE);
                     btnTimerStop.setVisibility(View.VISIBLE);
                     break;
                 case R.id.btnTimerStop:
-                    timerValue = TimerValue.STOPPED;
-                    countDownTimer.cancel();
+                    stopbtn();
                     btnTimerStart.setVisibility(View.VISIBLE);
                     btnTimerStop.setVisibility(View.INVISIBLE);
                     break;
