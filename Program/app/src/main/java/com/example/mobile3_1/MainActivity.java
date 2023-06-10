@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
     InfoFragment infoFragment;
     RecordFragment recordFragment;
 
-    //인포 프래그먼트
-    String[] items = {"item1", "item2", "item3", "item4", "item5"};
-    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,25 +55,5 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        //인포 프래그먼트
-        //Spinner 설정
-        spinner = findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        /*spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });*/
-
-        //레코드 프래그먼트
     }
 }

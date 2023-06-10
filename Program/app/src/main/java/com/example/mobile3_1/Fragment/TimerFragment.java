@@ -64,21 +64,48 @@ public class TimerFragment extends Fragment {
     TextView textViewTime;
     Button btnTimerStart;
     Button btnTimerStop;
+    Button btnTimerEnd;
+
+    //상태를 표시하는 '상수' 지정
+    public static final int INIT = 0;//처음
+    public static final int RUN = 1;//실행중
+    public static final int PAUSE = 2;//정지
+
+    //상태값을 저장하는 변수
+    public static int status = INIT;
 
     //타이머 시간 값을 저장할 변수
-    private long baseTime;
+    private long baseTime,pauseTime;
 
     private void startbtn(){
         baseTime = SystemClock.elapsedRealtime();
         handler.sendEmptyMessage(0);
+        status = RUN;
     }
 
-
     private void stopbtn(){
+        switch (status){
+            case RUN:
+                handler.removeMessages(0);
+                pauseTime = SystemClock.elapsedRealtime();
+                status = PAUSE;
+                break;
+            case PAUSE:
+                long reStart = SystemClock.elapsedRealtime();
+                baseTime += (reStart - pauseTime);
+                handler.sendEmptyMessage(0);
+                status = RUN;
+                break;
+        }
+    }
+
+    private void endbtn(){
         handler.removeMessages(0);
         String timeList = textViewTime.getText().toString();
         textViewTime.setText(timeList);
         baseTime = 0;
+        pauseTime = 0;
+        status = INIT;
     }
 
     private String getTime(){
@@ -101,7 +128,6 @@ public class TimerFragment extends Fragment {
         @NonNull
         @Override
         public void handleMessage(@NonNull Message msg) {
-
             textViewTime.setText(getTime());
             handler.sendEmptyMessage(0);
         }
@@ -127,6 +153,7 @@ public class TimerFragment extends Fragment {
         textViewTime = v.findViewById(R.id.textViewTime);
         btnTimerStart = v.findViewById(R.id.btnTimerStart);
         btnTimerStop = v.findViewById(R.id.btnTimerStop);
+        btnTimerEnd = v.findViewById(R.id.btnTimerEnd);
 
         View.OnClickListener timerListener = view -> {
             switch (view.getId()){
@@ -134,11 +161,16 @@ public class TimerFragment extends Fragment {
                     startbtn();
                     btnTimerStart.setVisibility(View.INVISIBLE);
                     btnTimerStop.setVisibility(View.VISIBLE);
+                    btnTimerEnd.setVisibility(View.VISIBLE);
                     break;
                 case R.id.btnTimerStop:
                     stopbtn();
+                    break;
+                case R.id.btnTimerEnd:
+                    endbtn();
                     btnTimerStart.setVisibility(View.VISIBLE);
                     btnTimerStop.setVisibility(View.INVISIBLE);
+                    btnTimerEnd.setVisibility(View.INVISIBLE);
                     break;
             }
         };
@@ -146,6 +178,7 @@ public class TimerFragment extends Fragment {
         //온클릭리스너 넣으면 실행안됨
         btnTimerStart.setOnClickListener(timerListener);
         btnTimerStop.setOnClickListener(timerListener);
+        btnTimerEnd.setOnClickListener(timerListener);
 
         // Inflate the layout for this fragment
         return v;

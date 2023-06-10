@@ -66,12 +66,27 @@
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/stop"
-        android:text="타이머 정지"
-        android:textSize="20dp"
+        android:text="일시정지/재시작"
+        android:textSize="15dp"
         android:textColor="@color/white"
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/progressBarCircle"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btnTimerEnd"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnTimerEnd"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/orange"
+        android:text="운동 종료"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/progressBarCircle"
+        app:layout_constraintLeft_toRightOf="@id/btnTimerStop"
         app:layout_constraintRight_toRightOf="parent"
         tools:ignore="MissingConstraints" />
 
