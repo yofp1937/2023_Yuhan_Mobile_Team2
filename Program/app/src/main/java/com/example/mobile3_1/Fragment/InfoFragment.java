@@ -1,5 +1,9 @@
 package com.example.mobile3_1.Fragment;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.example.mobile3_1.R;
+
+import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,8 +70,18 @@ public class InfoFragment extends Fragment {
         }
     }
 
-    String[] items = new String[] {"근력운동1", "근력운동2", "근력운동3", "근력운동4", "근력운동5"};
     Spinner spinner;
+    LinearLayout linear_none;
+    LinearLayout info_Linear_0;
+    LinearLayout info_Linear_1;
+    LinearLayout info_Linear_2;
+    LinearLayout info_Linear_3;
+    LinearLayout info_Linear_4;
+    VideoView video_0;
+    VideoView video_1;
+    VideoView video_2;
+    VideoView video_3;
+    VideoView video_4;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,22 +95,158 @@ public class InfoFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-/*        ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_spinner_dropdown_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);*/
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-
+                ((TextView)adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                Uri uri0 = Uri.parse("https://youtu.be/Fk9j6pQ6ej8");
+                Uri uri1 = Uri.parse("https://youtu.be/EBjYQeeBI-0");
+                Uri uri2 = Uri.parse("https://youtu.be/0DsXTSHo3lU");
+                Uri uri3 = Uri.parse("https://youtu.be/aoH7qNedO8k");
+                Uri uri4 = Uri.parse("https://youtu.be/kNv-0UEUb2Q");
+                switch (position){
+                    case 0:
+                        linear_none.setVisibility(View.INVISIBLE);
+                        info_Linear_0.setVisibility(View.VISIBLE);
+                        info_Linear_1.setVisibility(View.INVISIBLE);
+                        info_Linear_2.setVisibility(View.INVISIBLE);
+                        info_Linear_3.setVisibility(View.INVISIBLE);
+                        info_Linear_4.setVisibility(View.INVISIBLE);
+                        //0번 스쿼트
+                        video_0.setMediaController(new MediaController(getActivity()));
+                        video_0.requestFocus();
+                        video_0.setVideoURI(uri0);
+                        video_0.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mediaPlayer) {
+                                video_0.start();
+                            }
+                        });
+                        video_1.stopPlayback();
+                        video_2.stopPlayback();
+                        video_3.stopPlayback();
+                        video_4.stopPlayback();
+                        break;
+                    case 1:
+                        linear_none.setVisibility(View.INVISIBLE);
+                        info_Linear_0.setVisibility(View.INVISIBLE);
+                        info_Linear_1.setVisibility(View.VISIBLE);
+                        info_Linear_2.setVisibility(View.INVISIBLE);
+                        info_Linear_3.setVisibility(View.INVISIBLE);
+                        info_Linear_4.setVisibility(View.INVISIBLE);
+                        //1번 데드리프트
+                        video_1.setMediaController(new MediaController(getActivity()));
+                        video_1.requestFocus();
+                        video_1.setVideoURI(uri1);
+                        video_1.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mediaPlayer) {
+                                video_1.start();
+                            }
+                        });
+                        video_0.stopPlayback();
+                        video_2.stopPlayback();
+                        video_3.stopPlayback();
+                        video_4.stopPlayback();
+                        break;
+                    case 2:
+                        linear_none.setVisibility(View.INVISIBLE);
+                        info_Linear_0.setVisibility(View.INVISIBLE);
+                        info_Linear_1.setVisibility(View.INVISIBLE);
+                        info_Linear_2.setVisibility(View.VISIBLE);
+                        info_Linear_3.setVisibility(View.INVISIBLE);
+                        info_Linear_4.setVisibility(View.INVISIBLE);
+                        //2번 벤치프레스
+                        video_2.setMediaController(new MediaController(getActivity()));
+                        video_2.requestFocus();
+                        video_2.setVideoURI(uri2);
+                        video_2.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mediaPlayer) {
+                                video_2.start();
+                            }
+                        });
+                        video_0.stopPlayback();
+                        video_1.stopPlayback();
+                        video_3.stopPlayback();
+                        video_4.stopPlayback();
+                        break;
+                    case 3:
+                        linear_none.setVisibility(View.INVISIBLE);
+                        info_Linear_0.setVisibility(View.INVISIBLE);
+                        info_Linear_1.setVisibility(View.INVISIBLE);
+                        info_Linear_2.setVisibility(View.INVISIBLE);
+                        info_Linear_3.setVisibility(View.VISIBLE);
+                        info_Linear_4.setVisibility(View.INVISIBLE);
+                        //3번 푸쉬업
+                        video_3.setMediaController(new MediaController(getActivity()));
+                        video_3.requestFocus();
+                        video_3.setVideoURI(uri3);
+                        video_3.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mediaPlayer) {
+                                video_3.start();
+                            }
+                        });
+                        video_0.stopPlayback();
+                        video_1.stopPlayback();
+                        video_2.stopPlayback();
+                        video_4.stopPlayback();
+                        break;
+                    case 4:
+                        linear_none.setVisibility(View.INVISIBLE);
+                        info_Linear_0.setVisibility(View.INVISIBLE);
+                        info_Linear_1.setVisibility(View.INVISIBLE);
+                        info_Linear_2.setVisibility(View.INVISIBLE);
+                        info_Linear_3.setVisibility(View.INVISIBLE);
+                        info_Linear_4.setVisibility(View.VISIBLE);
+                        //4번 힙쓰러스트
+                        video_4.setMediaController(new MediaController(getActivity()));
+                        video_4.requestFocus();
+                        video_4.setVideoURI(uri4);
+                        video_4.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mediaPlayer) {
+                                video_4.start();
+                            }
+                        });
+                        video_0.stopPlayback();
+                        video_1.stopPlayback();
+                        video_2.stopPlayback();
+                        video_3.stopPlayback();
+                        break;
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                linear_none.setVisibility(View.VISIBLE);
+                info_Linear_0.setVisibility(View.INVISIBLE);
+                info_Linear_1.setVisibility(View.INVISIBLE);
+                info_Linear_2.setVisibility(View.INVISIBLE);
+                info_Linear_3.setVisibility(View.INVISIBLE);
+                info_Linear_4.setVisibility(View.INVISIBLE);
+                video_0.stopPlayback();
+                video_1.stopPlayback();
+                video_2.stopPlayback();
+                video_3.stopPlayback();
+                video_4.stopPlayback();
             }
         });
 
+        linear_none = v.findViewById(R.id.info_Linear_none);
+        info_Linear_0 = v.findViewById(R.id.info_Linear_0);
+        info_Linear_1 = v.findViewById(R.id.info_Linear_1);
+        info_Linear_2 = v.findViewById(R.id.info_Linear_2);
+        info_Linear_3 = v.findViewById(R.id.info_Linear_3);
+        info_Linear_4 = v.findViewById(R.id.info_Linear_4);
+        video_0 = v.findViewById(R.id.video_0);
+        video_1 = v.findViewById(R.id.video_1);
+        video_2 = v.findViewById(R.id.video_2);
+        video_3 = v.findViewById(R.id.video_3);
+        video_4 = v.findViewById(R.id.video_4);
+
         return v;
     }
+
 }

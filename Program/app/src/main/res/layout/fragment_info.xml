@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,16 +10,20 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:layout_gravity="top"
         android:padding="30dp"
         />
+
+    <!--기본 레이아웃-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/info_linear_none"
+        android:id="@+id/info_Linear_none"
+        android:visibility="visible"
+        android:layout_marginTop="65dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:background="@color/main">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,15 +31,80 @@
             android:layout_marginTop="200dp"
             android:text="메뉴에서 선택하세요"
             android:textColor="@color/white"
-            android:textSize="45sp"/>
+            android:textSize="45sp"
+            android:id="@+id/init"/>
     </LinearLayout>
 
+
+
+    <!--0번 레이아웃-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/info_linear_item0"
-        android:orientation="vertical"
-        android:visibility="invisible">
+        android:id="@+id/info_Linear_0"
+        android:visibility="invisible"
+        android:layout_marginTop="65dp"
+        android:background="@color/main">
+        <VideoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/video_0"/>
     </LinearLayout>
 
-</LinearLayout>
+    <!--1번 레이아웃-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/info_Linear_1"
+        android:visibility="invisible"
+        android:layout_marginTop="65dp"
+        android:background="@color/main">
+        <VideoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/video_1"/>
+    </LinearLayout>
+
+    <!--2번 레이아웃-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/info_Linear_2"
+        android:visibility="invisible"
+        android:layout_marginTop="65dp"
+        android:background="@color/main">
+        <VideoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/video_2"/>
+    </LinearLayout>
+
+    <!--3번 레이아웃-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/info_Linear_3"
+        android:visibility="invisible"
+        android:layout_marginTop="65dp"
+        android:background="@color/main">
+        <VideoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/video_3"/>
+    </LinearLayout>
+
+    <!--4번 레이아웃-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/info_Linear_4"
+        android:visibility="invisible"
+        android:layout_marginTop="65dp"
+        android:background="@color/main">
+        <VideoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/video_4"/>
+    </LinearLayout>
+
+</FrameLayout>

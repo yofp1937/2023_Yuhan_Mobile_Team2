@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinnerarray">
-        <item>아이템1</item>
-        <item>아이템2</item>
-        <item>아이템3</item>
-        <item>아이템4</item>
-        <item>아이템5</item>
+        <item>스쿼트</item>
+        <item>데드 리프트</item>
+        <item>벤치 프레스</item>
+        <item>푸쉬업</item>
+        <item>힙 쓰러스트</item>
     </string-array>
 
 </resources>
