@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.mobile3_1.MainActivity;
 import com.example.mobile3_1.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -74,8 +77,15 @@ public class TimerFragment extends Fragment {
     //상태값을 저장하는 변수
     public static int status = INIT;
 
+    private int progress = 3600000;
+    String timeList;
+
     //타이머 시간 값을 저장할 변수
     private long baseTime,pauseTime;
+
+    //RecordFragment로 정보를 전송할 Bundle
+    Bundle bundle;
+    RecordFragment recordFragment;
 
     private void startbtn(){
         baseTime = SystemClock.elapsedRealtime();
@@ -101,11 +111,12 @@ public class TimerFragment extends Fragment {
 
     private void endbtn(){
         handler.removeMessages(0);
-        String timeList = textViewTime.getText().toString();
+        timeList = textViewTime.getText().toString();
         textViewTime.setText(timeList);
         baseTime = 0;
         pauseTime = 0;
         status = INIT;
+        progress = 3600000;
     }
 
     private String getTime(){
@@ -116,7 +127,8 @@ public class TimerFragment extends Fragment {
         long m = overTime/1000/60;
         long s = (overTime/1000)%60;
 
-        progressBarCircle.setProgress(3600000-(int)overTime);
+        if(progress > 0)//주황색 게이지 꽉차면 시간만 바뀌게 설정
+        progressBarCircle.setProgress(progress-(int)overTime);
 
         String recTime = String.format("%02d:%02d:%02d",h,m,s);
 
@@ -137,10 +149,6 @@ public class TimerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -154,6 +162,8 @@ public class TimerFragment extends Fragment {
         btnTimerStart = v.findViewById(R.id.btnTimerStart);
         btnTimerStop = v.findViewById(R.id.btnTimerStop);
         btnTimerEnd = v.findViewById(R.id.btnTimerEnd);
+        recordFragment = new RecordFragment();
+        FragmentTransaction transcation = getActivity().getSupportFragmentManager().beginTransaction();
 
         View.OnClickListener timerListener = view -> {
             switch (view.getId()){
@@ -168,6 +178,11 @@ public class TimerFragment extends Fragment {
                     break;
                 case R.id.btnTimerEnd:
                     endbtn();
+                    bundle = new Bundle();
+                    bundle.putString("time", timeList);
+                    recordFragment.setArguments(bundle);
+                    transcation.replace(R.id.fragmentFrame, recordFragment);
+                    transcation.commit();
                     btnTimerStart.setVisibility(View.VISIBLE);
                     btnTimerStop.setVisibility(View.INVISIBLE);
                     btnTimerEnd.setVisibility(View.INVISIBLE);

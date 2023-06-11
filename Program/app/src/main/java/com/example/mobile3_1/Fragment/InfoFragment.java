@@ -91,6 +91,6 @@ public class InfoFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        return v;
     }
 }

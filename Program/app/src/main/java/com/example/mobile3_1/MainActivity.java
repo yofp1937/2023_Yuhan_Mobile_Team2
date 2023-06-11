@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         timerFragment = new TimerFragment();
         infoFragment = new InfoFragment();
         recordFragment = new RecordFragment();
+        
+        //첫화면 타이머 프래그먼트로 설정
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, timerFragment).commitAllowingStateLoss();
 
         //네비게이션바 클릭리스너

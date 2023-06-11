@@ -1,17 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.RecordFragment"
-    android:background="@color/main">
+    android:background="@color/main"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <DatePicker
+        android:id="@+id/datePicker"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/white"
-        android:textSize="50dp"
-        android:text="Record Fragment" />
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:background="@color/main_under"/>
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/edDiary"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:text="Record Fragment"
+        android:gravity="center"
+        android:background="@color/main"/>
+
+<!--    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/test"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="test"
+        />-->
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSave"
+        android:text="저장"/>
+
+
+</LinearLayout>
