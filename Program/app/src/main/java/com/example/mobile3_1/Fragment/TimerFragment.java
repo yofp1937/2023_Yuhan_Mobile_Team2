@@ -190,7 +190,6 @@ public class TimerFragment extends Fragment {
             }
         };
 
-        //온클릭리스너 넣으면 실행안됨
         btnTimerStart.setOnClickListener(timerListener);
         btnTimerStop.setOnClickListener(timerListener);
         btnTimerEnd.setOnClickListener(timerListener);
